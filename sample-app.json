@@ -96,9 +96,7 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
-        "labels": {
-          "name": "${NAME}"
+        "name": "${NAME}"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
