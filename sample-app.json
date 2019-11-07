@@ -25,7 +25,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "frontend"
+        "name": "${NAME}"
       },
       "spec": {
         "ports": [
@@ -38,7 +38,7 @@
           }
         ],
         "selector": {
-          "name": "frontend"
+          "name": "${NAME}"
         },
         "type": "ClusterIP",
         "sessionAffinity": "None"
@@ -51,7 +51,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "route-edge",
+        "name": "${NAME}",
         "annotations": {
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         }
@@ -60,7 +60,7 @@
         "host": "www.example.com",
         "to": {
           "kind": "Service",
-          "name": "frontend"
+          "name": "${NAME}"
         },
         "tls": {
           "termination": "edge"
@@ -72,7 +72,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-ruby-sample"
+        "name": "${NAME}"
       },
       "spec": {},
       "status": {
@@ -83,7 +83,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-25-centos7"
+        "name": "${NAME}"
       },
       "spec": {
         "dockerImageRepository": "centos/ruby-25-centos7"
@@ -96,7 +96,7 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-sample-build",
+        "name": "${NAME}",
         "labels": {
           "name": "ruby-sample-build"
         },
