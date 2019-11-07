@@ -9,6 +9,10 @@
       "tags": "instant-app,ruby,mysql"
     }
   },
+   "labels": {
+   "template": "ruby-helloworld-sample",
+   "app": "ruby-helloworld-sample"
+  },
   "objects": [
     {
       "kind": "Secret",
