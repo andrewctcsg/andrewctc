@@ -14,7 +14,7 @@
       "kind": "Secret",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "dbsecret"
       },
       "stringData" : {
         "mysql-user" : "${MYSQL_USER}",
@@ -25,7 +25,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "frontend"
       },
       "spec": {
         "ports": [
@@ -51,7 +51,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "route-edge",
         "annotations": {
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         }
@@ -72,7 +72,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "origin-ruby-sample"
       },
       "spec": {},
       "status": {
@@ -83,7 +83,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "ruby-25-centos7"
       },
       "spec": {
         "dockerImageRepository": "centos/ruby-25-centos7"
@@ -96,9 +96,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "ruby-sample-build",
         "labels": {
-          "name": "name": "ruby-helloworld-sample"
+          "name": "ruby-sample-build"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
@@ -167,7 +167,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "frontend",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -237,7 +237,7 @@
         "template": {
           "metadata": {
             "labels": {
-              "name": "ruby-helloworld-sample"
+              "name": "frontend"
             }
           },
           "spec": {
@@ -256,7 +256,7 @@
                     "name": "MYSQL_USER",
                     "valueFrom": {
                       "secretKeyRef" : {
-                        "name" : "name": "ruby-helloworld-sample",
+                        "name" : "dbsecret",
                         "key" : "mysql-user"
                       }
                     }
@@ -265,7 +265,7 @@
                     "name": "MYSQL_PASSWORD",
                     "valueFrom": {
                       "secretKeyRef" : {
-                        "name" : "name": "ruby-helloworld-sample",
+                        "name" : "dbsecret",
                         "key" : "mysql-password"
                       }
                     }
@@ -295,7 +295,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "database"
       },
       "spec": {
         "ports": [
@@ -393,7 +393,7 @@
         "template": {
           "metadata": {
             "labels": {
-              "name": "ruby-helloworld-sample"
+              "name": "database"
             }
           },
           "spec": {
@@ -412,7 +412,7 @@
                     "name": "MYSQL_USER",
                     "valueFrom": {
                       "secretKeyRef" : {
-                        "name": "ruby-helloworld-sample",
+                        "name" : "dbsecret",
                         "key" : "mysql-user"
                       }
                     }
@@ -421,7 +421,7 @@
                     "name": "MYSQL_PASSWORD",
                     "valueFrom": {
                       "secretKeyRef" : {
-                        "name": "ruby-helloworld-sample",
+                        "name" : "dbsecret",
                         "key" : "mysql-password"
                       }
                     }
@@ -434,7 +434,7 @@
                 "resources": {},
                 "volumeMounts": [
                   {
-                    "name": "ruby-helloworld-sample",
+                    "name": "ruby-helloworld-data",
                     "mountPath": "/var/lib/mysql/data"
                   }
                 ],
@@ -448,7 +448,7 @@
             ],
             "volumes": [
               {
-                "name": "ruby-helloworld-sample",
+                "name": "ruby-helloworld-data",
                 "emptyDir": {
                   "medium": ""
                 }
