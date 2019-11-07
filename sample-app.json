@@ -222,7 +222,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-ruby-sample:latest"
+                "name": "ruby-helloworld-sample:latest"
               }
             }
           },
@@ -244,7 +244,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld",
-                "image": "origin-ruby-sample",
+                "image": "ruby-helloworld-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
