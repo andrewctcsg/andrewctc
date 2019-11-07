@@ -14,7 +14,7 @@
       "kind": "Secret",
       "apiVersion": "v1",
       "metadata": {
-        "name": "dbsecret"
+        "name": "${NAME}"
       },
       "stringData" : {
         "mysql-user" : "${MYSQL_USER}",
