@@ -72,7 +72,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "origin-ruby-sample"
       },
       "spec": {},
       "status": {
@@ -96,9 +96,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "ruby-sample-build",
         "labels": {
-          "name": "ruby-helloworld-sample"
+          "name": "ruby-sample-build"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
@@ -130,7 +130,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/andrewctcsg/ruby-hello-world.git"
+            "uri": "https://github.com/openshift/ruby-hello-world.git"
           }
         },
         "strategy": {
@@ -151,7 +151,7 @@
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "ruby-helloworld-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "postCommit": {
@@ -222,7 +222,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "ruby-helloworld-sample:latest"
+                "name": "origin-ruby-sample:latest"
               }
             }
           },
@@ -244,7 +244,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld",
-                "image": "ruby-helloworld-sample",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
