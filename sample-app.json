@@ -98,7 +98,7 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "name": "ruby-sample-build"
+          "name": "${NAME}"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
