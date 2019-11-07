@@ -96,7 +96,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "ruby-sample-build",
+        "labels": {
+          "name": "ruby-sample-build"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
