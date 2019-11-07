@@ -38,7 +38,7 @@
           }
         ],
         "selector": {
-          "name": "${NAME}"
+          "name": "frontend"
         },
         "type": "ClusterIP",
         "sessionAffinity": "None"
@@ -60,7 +60,7 @@
         "host": "www.example.com",
         "to": {
           "kind": "Service",
-          "name": "${NAME}"
+          "name": "frontend"
         },
         "tls": {
           "termination": "edge"
@@ -96,7 +96,7 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "name": "${NAME}",
         "labels": {
           "name": "ruby-sample-build"
         },
@@ -130,7 +130,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/andrewctcsg/ruby-hello-world.git"
+            "uri": "https://github.com/openshift/ruby-hello-world.git"
           }
         },
         "strategy": {
@@ -167,7 +167,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "frontend",
+        "name": "${NAME}",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -230,14 +230,14 @@
             "type": "ConfigChange"
           }
         ],
-        "replicas": 1,
+        "replicas": 2,
         "selector": {
           "name": "frontend"
         },
         "template": {
           "metadata": {
             "labels": {
-              "name": "frontend"
+              "name": "${NAME}"
             }
           },
           "spec": {
@@ -295,7 +295,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "database"
+        "name": "${NAME}"
       },
       "spec": {
         "ports": [
@@ -321,7 +321,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "database",
+        "name": "${NAME}",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -393,7 +393,7 @@
         "template": {
           "metadata": {
             "labels": {
-              "name": "database"
+              "name": "${NAME}"
             }
           },
           "spec": {
