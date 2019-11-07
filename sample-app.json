@@ -130,7 +130,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/ruby-hello-world.git"
+            "uri": "https://github.com/andrewctcsg/ruby-hello-world.git"
           }
         },
         "strategy": {
@@ -230,7 +230,7 @@
             "type": "ConfigChange"
           }
         ],
-        "replicas": 2,
+        "replicas": 1,
         "selector": {
           "name": "frontend"
         },
