@@ -9,10 +9,6 @@
       "tags": "instant-app,ruby,mysql"
     }
   },
-   "labels": {
-   "template": "ruby-helloworld-sample",
-   "app": "ruby-helloworld-sample"
-  },
   "objects": [
     {
       "kind": "Secret",
@@ -29,7 +25,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "frontend"
       },
       "spec": {
         "ports": [
@@ -42,7 +38,7 @@
           }
         ],
         "selector": {
-          "name": "ruby-helloworld-sample"
+          "name": "frontend"
         },
         "type": "ClusterIP",
         "sessionAffinity": "None"
@@ -55,7 +51,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "route-edge",
         "annotations": {
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         }
@@ -64,7 +60,7 @@
         "host": "www.example.com",
         "to": {
           "kind": "Service",
-          "name": "ruby-helloworld-sample"
+          "name": "frontend"
         },
         "tls": {
           "termination": "edge"
@@ -76,7 +72,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "origin-ruby-sample"
       },
       "spec": {},
       "status": {
@@ -87,7 +83,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "ruby-25-centos7"
       },
       "spec": {
         "dockerImageRepository": "centos/ruby-25-centos7"
@@ -100,9 +96,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "ruby-sample-build",
         "labels": {
-          "name": "ruby-helloworld-sample"
+          "name": "ruby-sample-build"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
@@ -155,7 +151,7 @@
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "ruby-helloworld-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "postCommit": {
@@ -171,7 +167,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "frontend",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -226,7 +222,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "ruby-helloworld-sample:latest"
+                "name": "origin-ruby-sample:latest"
               }
             }
           },
@@ -236,19 +232,19 @@
         ],
         "replicas": 2,
         "selector": {
-          "name": "ruby-helloworld-sample"
+          "name": "frontend"
         },
         "template": {
           "metadata": {
             "labels": {
-              "name": "ruby-helloworld-sample"
+              "name": "frontend"
             }
           },
           "spec": {
             "containers": [
               {
                 "name": "ruby-helloworld",
-                "image": "ruby-helloworld-sample",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -299,7 +295,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample"
+        "name": "database"
       },
       "spec": {
         "ports": [
@@ -312,7 +308,7 @@
           }
         ],
         "selector": {
-          "name": "ruby-helloworld-sample"
+          "name": "database"
         },
         "type": "ClusterIP",
         "sessionAffinity": "None"
@@ -325,7 +321,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-helloworld-sample",
+        "name": "database",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -392,12 +388,12 @@
         ],
         "replicas": 1,
         "selector": {
-          "name": "ruby-helloworld-sample"
+          "name": "database"
         },
         "template": {
           "metadata": {
             "labels": {
-              "name": "ruby-helloworld-sample"
+              "name": "database"
             }
           },
           "spec": {
