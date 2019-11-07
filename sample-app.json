@@ -25,7 +25,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}"
+        "name": "frontend"
       },
       "spec": {
         "ports": [
@@ -51,7 +51,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "route-edge",
         "annotations": {
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         }
@@ -72,7 +72,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}"
+        "name": "origin-ruby-sample"
       },
       "spec": {},
       "status": {
@@ -83,7 +83,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}"
+        "name": "ruby-25-centos7"
       },
       "spec": {
         "dockerImageRepository": "centos/ruby-25-centos7"
@@ -130,7 +130,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/andrewctcsg/ruby-hello-world.git"
+            "uri": "https://github.com/openshift/ruby-hello-world.git"
           }
         },
         "strategy": {
@@ -167,7 +167,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "frontend",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -237,7 +237,7 @@
         "template": {
           "metadata": {
             "labels": {
-              "name": "${NAME}"
+              "name": "frontend"
             }
           },
           "spec": {
@@ -295,7 +295,7 @@
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}"
+        "name": "database"
       },
       "spec": {
         "ports": [
@@ -321,7 +321,7 @@
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "database",
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
         }
@@ -393,7 +393,7 @@
         "template": {
           "metadata": {
             "labels": {
-              "name": "${NAME}"
+              "name": "database"
             }
           },
           "spec": {
